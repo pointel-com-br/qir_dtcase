@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  qtest_ser_qir_dtcase:
+    tty: true
+    stdin_open: true
+    container_name: qtest_qir_dtcase
+    image: pointeldevs/stk_data
+    volumes:
+      - ${QIN_ROOT}/Work:/root
+      - ${QIN_ROOT}/Code:/root/Code
+    environment:
+      - QIN_ROOT=/root
+      - QIR_DTCASE_LINK=${QIR_DTCASE_LINK}
+    networks:
+      - qin_net_stk
+    working_dir: /root/Code/qir_dtcase
+
+networks:
+  qin_net_stk:
+    external: true

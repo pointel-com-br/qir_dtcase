@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+  qprod_ser_qir_dtcase:
+    tty: true
+    stdin_open: true
+    container_name: qprod_qir_dtcase
+    image: pointeldevs/run_data
+    volumes:
+      - ${QIN_ROOT}/Work:/root
+      - ${QIN_ROOT}/Code:/root/Code
+    environment:
+      - QIN_ROOT=/root
+      - QIR_DTCASE_LINK=${QIR_DTCASE_LINK}
+    restart: always
+    networks:
+      - qin_net_run
+    working_dir: /root/Code/qir_dtcase
+
+networks:
+  qin_net_run:
+    external: true

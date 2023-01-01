@@ -1,0 +1,5 @@
+{
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "qcode_ser_qir_dtcase",
+  "workspaceFolder": "/root/Code/qir_dtcase"
+}
