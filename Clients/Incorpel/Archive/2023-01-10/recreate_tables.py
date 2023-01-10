@@ -31,42 +31,10 @@ class PriceTableChange:
 tableChanges: list[PriceTableChange] = []
 
 
-tableChanges.append(PriceTableChange("SENINT", "NORINT",
-                    Decimal(0.95), None, KindProduct.BOTH))
-
-tableChanges.append(PriceTableChange("NORILH", "NORINT",
-                    Decimal(1.01), None, KindProduct.BOTH))
-tableChanges.append(PriceTableChange("SENILH", "SENINT",
-                    Decimal(1.01), None, KindProduct.BOTH))
-
-tableChanges.append(PriceTableChange("NORFX", "NORINT",
-                    Decimal(1.015), None, KindProduct.FABRICATION))
-tableChanges.append(PriceTableChange("NORFX", "NORINT",
-                    Decimal(0.985), None, KindProduct.RESALE))
-tableChanges.append(PriceTableChange("SENFX", "SENINT",
-                    Decimal(1.015), None, KindProduct.FABRICATION))
-tableChanges.append(PriceTableChange("SENFX", "SENINT",
-                    Decimal(0.985), None, KindProduct.RESALE))
-
-tableChanges.append(PriceTableChange("NOREXT", "NORINT",
-                    Decimal(1.02), None, KindProduct.BOTH))
-tableChanges.append(PriceTableChange("SENEXT", "SENINT",
-                    Decimal(1.02), None, KindProduct.BOTH))
-
-tableChanges.append(PriceTableChange("NORLAG", "NORINT",
-                    Decimal(1.03), None, KindProduct.BOTH))
-tableChanges.append(PriceTableChange("SENLAG", "SENINT",
-                    Decimal(1.03), None, KindProduct.BOTH))
-
 tableChanges.append(PriceTableChange("NORRS", "NORINT",
                     Decimal(1.05), None, KindProduct.BOTH))
 tableChanges.append(PriceTableChange("SENRS", "SENINT",
                     Decimal(1.05), None, KindProduct.BOTH))
-
-tableChanges.append(PriceTableChange("NORITA", "NORILH",
-                    None, Decimal(0.01), KindProduct.BOTH))
-tableChanges.append(PriceTableChange("SENITA", "SENILH",
-                    None, Decimal(0.01), KindProduct.BOTH))
 
 
 def getProductsAndValues(hand, origin: str, kindProduct: KindProduct) -> list[tuple[str, Decimal]]:
@@ -101,10 +69,10 @@ def recreateTables():
                     modified = "{:.2f}".format(modified)
                     hand.execute(
                         f"DELETE FROM precos WHERE produto = '{product}' AND tabela = '{change.destiny}'")
-                    affected = hand.rowcount
-                    if affected > 0:
-                        hand.execute(
-                            f"INSERT INTO precos (tabela, produto, valor) VALUES ('{change.destiny}', '{product}', {modified})")
+                    # affected = hand.rowcount
+                    # if affected > 0:
+                    hand.execute(
+                        f"INSERT INTO precos (tabela, produto, valor) VALUES ('{change.destiny}', '{product}', {modified})")
                     print("Done product", product, "on table", change.destiny)
     print("Finished to recreate all tables")
 
