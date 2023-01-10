@@ -6,7 +6,10 @@ import os
 
 import psycopg2
 
-with psycopg2.connect(os.getenv("QIR_DTCASE_LINK")) as link:
+address = os.getenv("QIR_DTCASE_LINK")
+print("Address", address)
+
+with psycopg2.connect(address) as link:
     with link.cursor() as hand:
         hand.execute("SELECT version()")
         db_version = hand.fetchone()
